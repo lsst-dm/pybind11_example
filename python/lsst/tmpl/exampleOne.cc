@@ -22,8 +22,6 @@
 #include "pybind11/pybind11.h"
 #include "pybind11/stl.h"
 
-#include "numpy/arrayobject.h"
-#include "numpy/arrayobject.h"
 #include "ndarray/pybind11.h"
 
 #include "lsst/pex/exceptions/python/Exception.h"
@@ -39,11 +37,6 @@ namespace tmpl {
 PYBIND11_PLUGIN(exampleOne) {
     py::module mod("exampleOne");
 
-    if (_import_array() < 0) {
-            PyErr_SetString(PyExc_ImportError, "numpy.core.multiarray failed to import");
-            return nullptr;
-    };
-
     pex::exceptions::python::declareException<ExampleError, pex::exceptions::RuntimeError>(
             mod, "ExampleError", "RuntimeError");
 
@@ -58,7 +51,7 @@ PYBIND11_PLUGIN(exampleOne) {
     clsExampleOne.def(py::init<>());
     clsExampleOne.def(py::init<std::string const&, ExampleOne::State>(), "fileName"_a, "state"_a=ExampleOne::State::RED);
     clsExampleOne.def(py::init<ExampleOne const&, bool>(), "other"_a, "deep"_a=true); // Copy constructor
-    
+
     clsExampleOne.def("getState", &ExampleOne::getState);
     clsExampleOne.def("setState", &ExampleOne::setState);
     clsExampleOne.def_property("state", &ExampleOne::getState, &ExampleOne::setState);
