@@ -1,5 +1,7 @@
 # -*- python -*-
 from lsst.sconsUtils import scripts
-scripts.BasicSConscript.pybind11(['exampleOne',
-                                  'exampleTwo/exampleTwo',
-                                  'exampleThree/exampleThree'], addUnderscore=False)
+scripts.BasicSConscript.pybind11(
+    ['_tmpl'],
+    extraSrc={'_tmpl': ["_ExampleOne.cc", "_ExampleTwo.cc", "_ExampleThree.cc"]},
+    addUnderscore=False
+)

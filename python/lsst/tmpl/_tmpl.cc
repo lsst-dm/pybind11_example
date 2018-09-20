@@ -21,25 +21,20 @@
 
 #include "pybind11/pybind11.h"
 
-#include "lsst/tmpl/ExampleTwo.h"
+#include "lsst/utils/python.h"
 
-namespace py = pybind11;
-using namespace pybind11::literals;
+namespace lsst { namespace tmpl {
 
-namespace lsst {
-namespace tmpl {
+void wrapExampleOne(utils::python::WrapperCollection & wrappers);
+void wrapExampleTwo(utils::python::WrapperCollection & wrappers);
+void wrapExampleThree(utils::python::WrapperCollection & wrappers);
 
-PYBIND11_PLUGIN(exampleTwo) {
-    py::module mod("exampleTwo");
-
-    py::class_<ExampleBase, std::shared_ptr<ExampleBase>> clsExampleBase(mod, "ExampleBase");
-    clsExampleBase.def("someMethod", &ExampleBase::someMethod);
-
-    py::class_<ExampleTwo, std::shared_ptr<ExampleTwo>, ExampleBase> clsExampleTwo(mod, "ExampleTwo");
-    clsExampleTwo.def(py::init<>());
-    clsExampleTwo.def("someOtherMethod", &ExampleTwo::someOtherMethod);
-
-    return mod.ptr();
+PYBIND11_MODULE(_tmpl, mod) {
+    utils::python::WrapperCollection wrappers(mod, "lsst.tmpl");
+    wrapExampleOne(wrappers);
+    wrapExampleTwo(wrappers);
+    wrapExampleThree(wrappers);
+    wrappers.finish();
 }
-}  // tmpl
-}  // lsst
+
+}} // lsst::tmpl

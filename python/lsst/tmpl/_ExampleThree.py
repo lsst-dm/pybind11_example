@@ -1,4 +1,4 @@
-# #
+#
 # Developed for the LSST Data Management System.
 # This product includes software developed by the LSST Project
 # (https://www.lsst.org).
@@ -19,7 +19,20 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-from __future__ import absolute_import
+import numpy as np
 
-from .exampleThree import *
-from .exampleThreeContinued import *
+from lsst.utils import TemplateMeta
+
+from ._tmpl import ExampleThreeI, ExampleThreeD
+
+__all__ = ["ExampleThree"]
+
+
+class ExampleThree(metaclass=TemplateMeta):
+    pass
+
+
+ExampleThree.register(np.int32, ExampleThreeI)
+ExampleThree.register(np.float64, ExampleThreeD)
+ExampleThree.alias("I", ExampleThreeI)
+ExampleThree.alias("D", ExampleThreeD)

@@ -21,37 +21,35 @@
 
 #include "pybind11/pybind11.h"
 
+#include "lsst/utils/python.h"
 #include "lsst/tmpl/ExampleThree.h"
 
 namespace py = pybind11;
 using namespace pybind11::literals;
 
-namespace lsst {
-namespace tmpl {
+namespace lsst { namespace tmpl {
+
 namespace {
 
 template <typename T>
-static void declareExampleThree(py::module & mod, std::string const & suffix) {
+void declareExampleThree(utils::python::WrapperCollection & wrappers, std::string const & suffix) {
     using Class = ExampleThree<T>;
     using PyClass = py::class_<Class, std::shared_ptr<Class>, ExampleBase>;
 
-    PyClass cls(mod, ("ExampleThree" + suffix).c_str());
-
-    cls.def(py::init<T>());
-    cls.def("someOtherMethod", &Class::someOtherMethod);
+    wrappers.wrapType(
+        PyClass(wrappers.module, ("ExampleThree" + suffix).c_str()),
+        [](auto & mod, auto & cls) {
+            cls.def(py::init<T>());
+            cls.def("someOtherMethod", &Class::someOtherMethod);
+        }
+    );
 }
 
-}  // <anonymous>
+} // anonymous
 
-PYBIND11_PLUGIN(exampleThree) {
-    py::module::import("lsst.tmpl.exampleTwo");
-
-    py::module mod("exampleThree");
-
-    declareExampleThree<float>(mod, "F");
-    declareExampleThree<double>(mod, "D");
-
-    return mod.ptr();
+void wrapExampleThree(utils::python::WrapperCollection & wrappers) {
+    declareExampleThree<int>(wrappers, "I");
+    declareExampleThree<double>(wrappers, "D");
 }
-}  // tmpl
-}  // lsst
+
+}}  // namespace lsst::tmpl

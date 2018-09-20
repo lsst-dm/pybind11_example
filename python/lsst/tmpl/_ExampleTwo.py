@@ -19,19 +19,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-from __future__ import absolute_import
-import numpy as np
+from lsst.utils import continueClass
 
-from lsst.utils import TemplateMeta
-from .exampleThree import ExampleThreeF, ExampleThreeD
+from ._tmpl import ExampleTwo
 
-__all__ = [] # import for side effects
+__all__ = []  # import for side effects
 
-class ExampleThree(metaclass=TemplateMeta):
-    pass
 
-ExampleThree.register(np.float32, ExampleThreeF)
-ExampleThree.register(np.float64, ExampleThreeD)
-ExampleThree.alias("F", ExampleThreeF)
-ExampleThree.alias("D", ExampleThreeD)
+@continueClass
+class ExampleTwo:
 
+    def someExtraFunction(self, x):
+        return x + self.someOtherMethod()
