@@ -25,7 +25,7 @@
 #ifndef LSST_TMPL_EXAMPLETHREE_H
 #define LSST_TMPL_EXAMPLETHREE_H
 
-#include "lsst/TMPL/ExampleTwo.h"
+#include "lsst/tmpl/ExampleTwo.h"
 
 namespace lsst {
 namespace tmpl {

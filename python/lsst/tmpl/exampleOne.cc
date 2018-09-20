@@ -29,7 +29,7 @@
 
 #include "lsst/pex/exceptions/python/Exception.h"
 
-#include "lsst/TMPL/ExampleOne.h"
+#include "lsst/tmpl/ExampleOne.h"
 
 namespace py = pybind11;
 using namespace pybind11::literals;

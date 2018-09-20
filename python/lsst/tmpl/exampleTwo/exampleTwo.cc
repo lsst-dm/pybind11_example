@@ -22,35 +22,23 @@
 
 #include "pybind11/pybind11.h"
 
-#include "lsst/TMPL/ExampleThree.h"
+#include "lsst/tmpl/ExampleTwo.h"
 
 namespace py = pybind11;
 using namespace pybind11::literals;
 
 namespace lsst {
 namespace tmpl {
-namespace {
 
-template <typename T>
-static void declareExampleThree(py::module & mod, std::string const & suffix) {
-    using Class = ExampleThree<T>;
-    using PyClass = py::class_<Class, std::shared_ptr<Class>, ExampleBase>;
+PYBIND11_PLUGIN(exampleTwo) {
+    py::module mod("exampleTwo");
 
-    PyClass cls(mod, ("ExampleThree" + suffix).c_str());
+    py::class_<ExampleBase, std::shared_ptr<ExampleBase>> clsExampleBase(mod, "ExampleBase");
+    clsExampleBase.def("someMethod", &ExampleBase::someMethod);
 
-    cls.def(py::init<T>());
-    cls.def("someOtherMethod", &Class::someOtherMethod);
-}
-
-}  // <anonymous>
-
-PYBIND11_PLUGIN(exampleThree) {
-    py::module::import("lsst.TMPL.exampleTwo");
-
-    py::module mod("exampleThree");
-
-    declareExampleThree<float>(mod, "F");
-    declareExampleThree<double>(mod, "D");
+    py::class_<ExampleTwo, std::shared_ptr<ExampleTwo>, ExampleBase> clsExampleTwo(mod, "ExampleTwo");
+    clsExampleTwo.def(py::init<>());
+    clsExampleTwo.def("someOtherMethod", &ExampleTwo::someOtherMethod);
 
     return mod.ptr();
 }
