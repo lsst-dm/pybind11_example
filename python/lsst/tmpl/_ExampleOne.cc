@@ -41,7 +41,8 @@ void wrapExampleOne(utils::python::WrapperCollection & wrappers) {
         py::class_<ExampleOne, std::shared_ptr<ExampleOne>>(wrappers.module, "ExampleOne"),
         [](auto & mod, auto & cls) {
             cls.def(py::init<>());
-            cls.def(py::init<std::string const&, ExampleOne::State>(), "fileName"_a, "state"_a=ExampleOne::State::RED);
+            cls.def(py::init<std::string const&, ExampleOne::State>(),
+                    "fileName"_a, "state"_a=ExampleOne::State::RED);
             cls.def(py::init<ExampleOne const&, bool>(), "other"_a, "deep"_a=true); // Copy constructor
             cls.def("getState", &ExampleOne::getState);
             cls.def("setState", &ExampleOne::setState);
