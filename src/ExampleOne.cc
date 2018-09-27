@@ -48,9 +48,10 @@ std::vector<int> ExampleOne::computeSomeVector() const {
     return v;
 }
 
-void doSomethingWithArray(ndarray::Array<int, 2, 2> const &) {}
+void ExampleOne::doSomethingWithArray(ndarray::Array<int, 2, 2> const &) {}
 
-static void initializeSomething(std::string const &) {}
+void ExampleOne::initializeSomething(std::string const &) {}
+
 }  // tmpl
 }  // lsst
 
