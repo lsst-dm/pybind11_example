@@ -1,11 +1,11 @@
 // -*- lsst-c++ -*-
 
 /*
- * LSST Data Management System
- * Copyright 2008-2017  AURA/LSST.
- *
- * This product includes software developed by the
- * LSST Project (http://www.lsst.org/).
+ * Developed for the LSST Data Management System.
+ * This product includes software developed by the LSST Project
+ * (https://www.lsst.org).
+ * See the COPYRIGHT file at the top-level directory of this distribution
+ * for details of code ownership.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,15 +17,14 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the LSST License Statement and
- * the GNU General Public License along with this program.  If not,
- * see <https://www.lsstcorp.org/LegalNotices/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #ifndef LSST_TMPL_EXAMPLETHREE_H
 #define LSST_TMPL_EXAMPLETHREE_H
 
-#include "lsst/TMPL/ExampleTwo.h"
+#include "lsst/tmpl/ExampleTwo.h"
 
 namespace lsst {
 namespace tmpl {

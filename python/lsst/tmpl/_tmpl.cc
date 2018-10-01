@@ -1,5 +1,3 @@
-// -*- lsst-c++ -*-
-
 /*
  * Developed for the LSST Data Management System.
  * This product includes software developed by the LSST Project
@@ -21,37 +19,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <string>
-#include <vector>
+#include "pybind11/pybind11.h"
 
-#include "lsst/tmpl/ExampleOne.h"
+#include "lsst/utils/python.h"
 
-namespace lsst {
-namespace tmpl {
+namespace lsst { namespace tmpl {
 
-ExampleOne::ExampleOne(std::string const &fileName, State state){};
+void wrapExampleOne(utils::python::WrapperCollection & wrappers);
+void wrapExampleTwo(utils::python::WrapperCollection & wrappers);
+void wrapExampleThree(utils::python::WrapperCollection & wrappers);
 
-ExampleOne::ExampleOne(ExampleOne const &other, bool deep){};
-
-double ExampleOne::computeSomething(int myParam) const { return static_cast<double>(myParam) + 1.0; }
-
-double ExampleOne::computeSomethingElse(int myFirstParam, double mySecondParam) const {
-    return static_cast<double>(myFirstParam) + mySecondParam;
+PYBIND11_MODULE(_tmpl, mod) {
+    utils::python::WrapperCollection wrappers(mod, "lsst.tmpl");
+    wrapExampleOne(wrappers);
+    wrapExampleTwo(wrappers);
+    wrapExampleThree(wrappers);
+    wrappers.finish();
 }
 
-double ExampleOne::computeSomethingElse(int myFirstParam, std::string) const {
-    return static_cast<double>(myFirstParam) + 1.0;
-}
-
-std::vector<int> ExampleOne::computeSomeVector() const {
-    std::vector<int> v(2);
-    return v;
-}
-
-void ExampleOne::doSomethingWithArray(ndarray::Array<int, 2, 2> const &) {}
-
-void ExampleOne::initializeSomething(std::string const &) {}
-
-}  // tmpl
-}  // lsst
-
+}} // lsst::tmpl

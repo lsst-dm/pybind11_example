@@ -1,0 +1,5 @@
+doc/html
+doc/xml
+doc/doxygen.conf
+doc/*.tag
+version.py
