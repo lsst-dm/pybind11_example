@@ -65,6 +65,8 @@ void wrapExampleOne(utils::python::WrapperCollection & wrappers) {
                         return self + other;
                     },
                     py::is_operator());
+            utils::python::addOutputOp(cls, "__str__");
+            utils::python::addOutputOp(cls, "__repr__");
         }
     );
 
